@@ -6,11 +6,6 @@
 #ifndef _SORTERS_
 #define _SORTERS_
 
-int arraySize(int* arr)
-{
-	return sizeof(arr)/sizeof(arr[0]);
-}
-
 void merge(int* a, int lo, int hi, int mid)
 {
 	int temp[hi-lo];
@@ -121,11 +116,11 @@ void quickSort(int* arr, int lo, int hi)
 	quickSort(arr, pivot+1, hi);
 }
 
-void insertionSort(int* arr)
+void insertionSort(int* arr, int size)
 {
 	int temp, j;
 
-	for (int i = 1; i < arraySize(arr); i++)
+	for (int i = 1; i < size; i++)
 	{
 		temp = arr[i];
 
@@ -138,13 +133,13 @@ void insertionSort(int* arr)
 	}
 }
 
-void selectionSort(int* arr)
+void selectionSort(int* arr, int size)
 {
 	int i, j, minIndex;
-	for (i = 0; i < arraySize(arr) - 1; i++){
+	for (i = 0; i < size - 1; i++){
 		minIndex = i;
 	
-		for (j = i + 1; j < arraySize(arr); j++)
+		for (j = i + 1; j < size; j++)
 		{
 			if (arr[j] < arr[minIndex])
 				minIndex = j;
@@ -156,10 +151,10 @@ void selectionSort(int* arr)
 	}
 }
 
-void shellSort(int* arr)
+void shellSort(int* arr, int size)
 {
-	for (int gap = arraySize(arr) / 2; gap > 0; gap /= 2){
-		for (int i = gap; i < arraySize(arr); i++){
+	for (int gap = size / 2; gap > 0; gap /= 2){
+		for (int i = gap; i < size; i++){
 			int temp = arr[i];
 			int j = i;
 

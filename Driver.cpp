@@ -18,6 +18,8 @@ void runSort(sortCodes sortCode);
 
 int main()
 {
+	srand(time(NULL));
+
 	for(int sortCode = insertionSortCode; sortCode != END; sortCode++)
 	{
 		runSort((sortCodes) sortCode);
@@ -28,7 +30,6 @@ int main()
 
 void populateList(int* arr, int size)
 {
-	srand(time(NULL));
 	for (int i = 0; i < size; i++)
 	{
 		arr[i] = rand() % 100;
@@ -79,28 +80,29 @@ void runSort(sortCodes sortCode)
 	std::cout << "list before sort" << std::endl;
 	printList(arr, ARR_SIZE);
 
-	std::cout << "\nlist after sort" << std::endl;
-
 	switch (sortCode)
 	{
 		case insertionSortCode:
-			insertionSort(arr);
+			insertionSort(arr, ARR_SIZE);
 			break;
 		case selectionSortCode:
-			selectionSort(arr);
+			selectionSort(arr, ARR_SIZE);
 			break;
 		case mergeSortCode:
-			mergeSort(arr, 0, ARR_SIZE-1);
+			std::cout << "\nmerge sort currently broken /:\n";
+			//mergeSort(arr, 0, ARR_SIZE);
 			break;
 		case quickSortCode:
-			quickSort(arr, 0, ARR_SIZE-1);
+			quickSort(arr, 0, ARR_SIZE);
 			break;
 		case shellSortCode:
-			shellSort(arr);
+			shellSort(arr, ARR_SIZE);
 			break;
 		default:
 			return;
 	}
+
+	std::cout << "\nlist after sort" << std::endl;
 	printList(arr, ARR_SIZE);
 
 	std::cout << "\n-----------------------------------------\n";
