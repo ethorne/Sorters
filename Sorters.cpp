@@ -41,16 +41,23 @@ void merge(int* a, int lo, int hi, int mid)
 	}
 }
 
-void mergeSort(int* a, int lo, int hi)
+void mergeSortHelper(int* a, int lo, int hi)
 {
 	if (lo >= hi)
 	{
 		return;
 	}
 	int mid = lo + ((hi-lo)/2);
-	mergeSort(a, lo, mid);
-	mergeSort(a, mid+1, hi);
+
+	mergeSortHelper(a, lo, mid);
+	mergeSortHelper(a, mid+1, hi);
 	merge(a, lo, hi, mid);
+}
+
+void mergeSort(int* a, int size)
+{
+	mergeSortHelper(a, 0, size - 1);
+	std::cout << "outta helper" << std::endl;
 }
 
 int partition(int* arr, int lo, int hi)
@@ -80,42 +87,6 @@ int random_partition(int* arr, int lo, int hi)
 	return partition(arr, lo, hi);
 }
 
-int random_select(int* arr, int lo, int hi, int i)
-{
-	assert(i >=1 && i <= hi);
-
-	int pivot;
-
-	while (lo < hi)
-	{
-		pivot = random_partition(arr, lo, hi);
-		int k = pivot - lo + 1; // k is rank of pivot
-
-		if (i == k) // i is rank which we seek
-		{
-			return arr[pivot];
-		}
-		else if (i < k) // sought after item is left of pivot
-		{
-			hi = pivot - 1;
-		}
-		else // sought after item is right of pivott;
-		{
-			lo = pivot + 1;
-			i -= k;
-		}
-	}
-	return arr[lo];
-}
-
-void quickSort(int* arr, int lo, int hi)
-{
-	if (lo >= hi) return;
-	int pivot = random_partition(arr, lo, hi);
-	quickSort(arr, lo, pivot-1);
-	quickSort(arr, pivot+1, hi);
-}
-
 void insertionSort(int* arr, int size)
 {
 	int temp, j;
@@ -131,6 +102,20 @@ void insertionSort(int* arr, int size)
 
 		arr[j] = temp;
 	}
+}
+
+void quickSortHelper(int* arr, int lo, int hi)
+{
+	if (hi <= lo) 
+		return;
+	int pivot = random_partition(arr, lo, hi);
+	quickSortHelper(arr, lo, pivot-1);
+	quickSortHelper(arr, pivot+1, hi);
+}
+
+void quickSort(int *arr, int size)
+{
+	quickSortHelper(arr, 0, size-1);
 }
 
 void selectionSort(int* arr, int size)

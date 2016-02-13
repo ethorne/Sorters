@@ -90,10 +90,10 @@ void runSort(sortCodes sortCode)
 			break;
 		case mergeSortCode:
 			std::cout << "\nmerge sort currently broken /:\n";
-			//mergeSort(arr, 0, ARR_SIZE);
+			//mergeSort(arr, ARR_SIZE);
 			break;
 		case quickSortCode:
-			quickSort(arr, 0, ARR_SIZE);
+			quickSort(arr, ARR_SIZE);
 			break;
 		case shellSortCode:
 			shellSort(arr, ARR_SIZE);
@@ -106,4 +106,5 @@ void runSort(sortCodes sortCode)
 	printList(arr, ARR_SIZE);
 
 	std::cout << "\n-----------------------------------------\n";
+	delete[] arr;
 }
